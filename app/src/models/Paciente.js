@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { model, Schema } = model;
+const { model, Schema } = mongoose;
 const pacienteSchema = new Schema({
     nome: {
         type: String,
@@ -7,18 +7,41 @@ const pacienteSchema = new Schema({
         unique: true
     },
     cpf: {
-        type: String,
+        type: Number,
         required: true,
         unique: true
     },
-    genero: String,
+    sexo: String,
     celular: String,
-    nome_mae: String,
-    convenio: mongoose.Types.ObjectId,
-    prontuario: {
-        data: Date,
-        efetivado: Boolean,
-        descricao: String
-    }
+    nomeMae: String,
+    
+    atendimentos: [
+        {
+            data: String,
+            primeiraConsulta: Boolean,
+            particular: Boolean,
+            convenio: Boolean,
+            origem: String, /** [Convenio | Particular] */
+            descricao: String,
+            pagamento: {
+                valor: mongoose.Types.Decimal128,
+                forma: String, /** [Especie | Debito|Credito Vista|Credito Parcelado|Pix|Cheque|Cheque Parcelado|TED] */
+                parcelado: Boolean,
+                parcelas: Number,
+                bandeiraCartao: String, /** [Visa|Mastercard] */
+                cheque: [{
+                    banco: String,
+                    numero: Number
+                }]
+
+            }  
+
+        }
+
+       
+    ]
 
 })
+
+
+module.exports = model('Paciente', pacienteSchema);
