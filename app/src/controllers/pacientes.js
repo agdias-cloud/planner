@@ -31,10 +31,16 @@ exports.criarAtendimento = async(req, res, next) => {
         $push: {
             "atendimentos": {
                 "data": parse(req.body.data, 'dd/MM/yyyy', new Date()),
-                "origem": req.body.origem,
                 "primeiraConsulta": req.body.primeiraConsulta,
+                "particular": req.body.particular,
                 "convenio": req.body.convenio,
-               
+                "origem": req.body.origem,
+                "descricao": req.body.descricao,
+                "custo": req.body.custo,
+                "formaPagamento": req.body.formaPagamento,
+                "bandeiraCartao": req.body.bandeiraCartao,
+                "parcelado": req.body.parcelado,
+                "numParcelas": req.body.numParcelas 
             }
         }
      }

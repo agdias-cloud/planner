@@ -17,28 +17,22 @@ const pacienteSchema = new Schema({
     
     atendimentos: [
         {
-            data: String,
+            data: {
+                type: Date,
+                required: true,
+                unique: true, //The unique Option is Not a Validator
+            },
             primeiraConsulta: Boolean,
             particular: Boolean,
-            convenio: Boolean,
+            convenio: String,
             origem: String, /** [Convenio | Particular] */
             descricao: String,
-            pagamento: {
-                valor: mongoose.Types.Decimal128,
-                forma: String, /** [Especie | Debito|Credito Vista|Credito Parcelado|Pix|Cheque|Cheque Parcelado|TED] */
-                parcelado: Boolean,
-                parcelas: Number,
-                bandeiraCartao: String, /** [Visa|Mastercard] */
-                cheque: [{
-                    banco: String,
-                    numero: Number
-                }]
-
-            }  
-
+            custo: mongoose.Types.Decimal128,
+            formaPagamento: String,
+            bandeiraCartao: String,
+            parcelado: Boolean,
+            numParcelas: Number,
         }
-
-       
     ]
 
 })
