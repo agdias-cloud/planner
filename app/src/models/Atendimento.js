@@ -9,8 +9,6 @@ const AtendimentoSchema = new Schema({
     descricao: String,
     procedimentos: [mongoose.Types.ObjectId],
     convenio: mongoose.Types.ObjectId,
-    
-    
     formaPagamento: String, /** [Especie|Pix|Credito|Debito|Cheque] */
     cheque: {
         agencia: String,
